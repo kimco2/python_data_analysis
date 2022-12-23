@@ -1,71 +1,78 @@
-# importing data file
+# importing modules and saying where file is located
 import os
 import csv
 budget_csv = os.path.join('Resources', 'budget_data.csv')
 
-# Track various financial paramaters
+# Establishing initital variables and their values
 total_months = 0
 total_net = 0
-month_of_change = []
 net_change_list = []
 greatest_increase = ["", 0]
 greatest_decrease = ["", 99999999999]
 
-# Read the csv file and convert it into a list of dictionaries
+# Reading in the csv file
 with open(budget_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
           
-    # Read the header row first 
+    # Extracting the header row
     csv_header = next(csv_reader)
-   
-    # extract first row to avoid appending to net_change_list
+    
+   # Skipping to the next row in the csv file, being Jan-2010.
+   # Then setting Jan-10 profit figure as the initial value for 'previous_value' which I will use when calcuating the change from month to month.
     first_row = next(csv_reader)
-    previous_net = int(first_row[1])
+    previous_value = int(first_row[1])
+    
+    # Establishing the initial value for total months and total net to include Jan-10
+    total_months += 1
+    total_net += int(first_row[1])
        
+    # Looping through the rows in the csv file
     for row in csv_reader:
+        # Setting which columns date and profit and loss are
         date = row[0]
         profit_loss = row[1]
 
-        # calcuating total months
+        # Calcuating the total number of months
         total_months += 1
-     
-        # calculating total profit
+          
+        # Calculating the total profit
         total_net += int(profit_loss)
-
-        # track net change
-        net_change = int(row[1]) - previous_net
-        previous_net = int(row[1])
+       
+        # Calculating the net change and appending it to the list called 'net change list'
+        net_change = int(row[1]) - previous_value
         net_change_list.append(net_change)
-      
-        # calcuating the average change in profit
+        # Updating the previous_value field to be equal to the profit/loss value of the current row
+        previous_value = int(row[1])
+                
+        # Calcuating the average change in profit
         average_profit_change = sum(net_change_list) / len(net_change_list)
 
-        # calculate greatest increase
+        # Checking whether the row has had the greatest increase
+        # If it has, it's net change and date are assigned to the field 'greatest_increase'
         if net_change > greatest_increase[1]:
             greatest_increase[0] = date
             greatest_increase [1] = net_change
 
-        #calculte the greatest decrease
+        # Checking whether the row has had the greatest net decrease
+        # If it has, it's net change and date are assigned to the field 'greatest_decrease'
         if net_change < greatest_decrease[1]:
             greatest_decrease [0] = date
             greatest_decrease [1] = net_change
 
-# print results to the terminal
-print(f"Financial Analysis")
-print (f"-----------------------------")
-print(f"Total Months: {str(total_months)}")
-print(f"Total: $ {str(total_net)}")
-print(f"Average : $ {round(average_profit_change,2)}")
-print(f"Greatest Increase in Profits: {greatest_increase[0]} (${str(greatest_increase[1])})")
-print(f"Greatest Decrease in Profits: {greatest_decrease[0]} (${str(greatest_decrease[1])})")
+output_text = (f"Financial Analysis\n"
+f"-----------------------------\n"
+f"Total Months: {str(total_months)}\n"
+f"Total: ${str(total_net)}\n"
+f"Average : ${round(average_profit_change,2)}\n"
+f"Greatest Increase in Profits: {greatest_increase[0]} (${str(greatest_increase[1])})\n"
+f"Greatest Decrease in Profits: {greatest_decrease[0]} (${str(greatest_decrease[1])})\n")
 
-# export the results to a text file
-report = open('PyBank_report.txt', 'w')
-report.write(f"Financial Analysis\n")
-report.write(f"-----------------------------\n")
-report.write(f"Total Months: {str(total_months)}\n")
-report.write(f"Total: $ {str(total_net)}\n")
-report.write(f"Average : $ {round(average_profit_change,2)}\n")
-report.write(f"Greatest Increase in Profits: {greatest_increase[0]} (${str(greatest_increase[1])})\n")
-report.write(f"Greatest Decrease in Profits: {greatest_decrease[0]} (${str(greatest_decrease[1])})\n")
-report.close ()
+# Printing results to the terminal
+print(output_text)
+
+# Printing the results to a txt file
+output_file = os.path.join("analysis", "output.txt")
+with open(output_file, "w") as file:
+        file.write(output_text)
+
+
