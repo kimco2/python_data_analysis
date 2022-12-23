@@ -70,7 +70,7 @@ f"Greatest Decrease in Profits: {greatest_decrease[0]} (${str(greatest_decrease[
 # Printing results to the terminal
 print(output_text)
 
-# Printing the results to a txt file
+# Noting file path for the output text file and and printing the results to it
 output_file = os.path.join("analysis", "output.txt")
 with open(output_file, "w") as file:
         file.write(output_text)

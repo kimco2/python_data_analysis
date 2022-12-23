@@ -35,16 +35,18 @@ with open(election_csv) as csvfile:
         # my key for the dictionary is 'current_candidate' each time the candidate comes up it will add to the count for that candidate
         candidate_counts[current_candidate] += 1
 
-# Saving the output file path
-# save the output file path
+# Saving the txt output file path
 output_file = os.path.join("analysis", "output.txt")
 
 output_1 = (f"Election Results\n"
 f"--------------------\n"
 f"Total Votes: {total_votes}\n"
 f"--------------------\n")
+
+# Printing results to the terminal
 print(output_1)
 
+# Printing the results to a text file
 with open(output_file, "a") as file:
     file.write(output_1)
     # file.write(f"{output_1}")
@@ -54,7 +56,11 @@ vote_count = 0
 for candidate in candidate_list:
     candidate_percent = round(candidate_counts[candidate]/total_votes * 100,3)
     output_2 = (f"{candidate}: {candidate_percent}% ({candidate_counts[candidate]})\n")
+    
+    # Printing results to the terminal
     print(output_2)
+
+    # Printing the results to the text file
     with open(output_file, "a") as file:
         file.write(output_2)
         # file.write(f"{output_2}")
@@ -66,7 +72,10 @@ for candidate in candidate_list:
 output_3 = (f"--------------------\n"
 f"Winner: {winner}\n"
 f"--------------------\n")
+
+# Printing results to the terminal
 print(output_3)
 
+# Printing results to the text file
 with open(output_file, "a") as file:
         file.write(f"{output_3}")
