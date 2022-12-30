@@ -2,13 +2,13 @@ Hello
 
 This repository is for the homework challenge 3 on python.  
 
-This folder has two main directories:
+It contains two folders:
 1 - PyBank
 2 - PyPoll
 
-Inside each there is a file called main.py which contains the python code.
-
-The output from when the code has been run can be found in the analysis folder, in the file called 'output.txt'.
+Inside each folder there is:
+ - A file called main.py which contains the python code.
+ - An additional folder called 'analysis' which contains the output text file from when the code has been run (output.txt).
 
 Thanks
 Kim
