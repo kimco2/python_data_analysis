@@ -71,4 +71,5 @@ print(output_3)
 
 # Printing results to the text file
 with open(output_file, "a") as file:
-        file.write(f"{output_3}")
+        file.write(output_3)
+     
