@@ -18,7 +18,6 @@ with open(budget_csv) as csvfile:
     csv_header = next(csv_reader)
     
    # Skipping to the next row in the csv file, being Jan-2010.
-   # Then setting Jan-10 profit figure as the initial value for 'previous_value' which I will use when calcuating the change from month to month.
     first_row = next(csv_reader)
     previous_value = int(first_row[1])
     
@@ -28,7 +27,7 @@ with open(budget_csv) as csvfile:
        
     # Looping through the rows in the csv file
     for row in csv_reader:
-        # Setting which columns date and profit and loss are
+        # Setting which columns date and profit and loss are in
         date = row[0]
         profit_loss = row[1]
 
@@ -53,7 +52,7 @@ with open(budget_csv) as csvfile:
             greatest_increase[0] = date
             greatest_increase [1] = net_change
 
-        # Checking whether the row has had the greatest net decrease
+        # Checking whether the row has had the greatest decrease
         # If it has, it's net change and date are assigned to the field 'greatest_decrease'
         if net_change < greatest_decrease[1]:
             greatest_decrease [0] = date
@@ -63,7 +62,7 @@ output_text = (f"Financial Analysis\n"
 f"-----------------------------\n"
 f"Total Months: {str(total_months)}\n"
 f"Total: ${str(total_net)}\n"
-f"Average : ${round(average_profit_change,2)}\n"
+f"Average Change: ${round(average_profit_change,2)}\n"
 f"Greatest Increase in Profits: {greatest_increase[0]} (${str(greatest_increase[1])})\n"
 f"Greatest Decrease in Profits: {greatest_decrease[0]} (${str(greatest_decrease[1])})\n")
 
