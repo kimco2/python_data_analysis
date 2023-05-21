@@ -1,14 +1,20 @@
-Hello
+# Introduction to analysing data in Python
 
-This repository is for the homework challenge 3 on python.  
+ ### **Overview**
+An early project undertaken to understand how to analyse data in Python.  Two datasets were analysed:
+ - Dataset 1 - looking at financial data
+ - Dataset 2 - looking at election results
 
-It contains two folders:
-1 - PyBank
-2 - PyPoll
+### **Folder structure**
+There are two folders *PyBank* and *PyPoll*.  Each contain:
+ - A file called *main.py* which contains the python code.
+ - An additional folder called *analysis* which contains the output text file from when the code has been run (output.txt).
 
-Inside each folder there is:
- - A file called main.py which contains the python code.
- - An additional folder called 'analysis' which contains the output text file from when the code has been run (output.txt).
+<br>
 
-Thanks
-Kim
+---
+
+### **Contact**
+Email: kymcoleman@gmail.com
+
+---
